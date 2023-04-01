@@ -1,4 +1,10 @@
-import { ADD_TASK, TOGGLE_TASK, SET_FILTER } from "./constants";
+import {
+  ADD_TASK,
+  TOGGLE_TASK,
+  SET_FILTER,
+  EDIT_TASK,
+  DELETE_TASK,
+} from "./constants";
 
 //* Define the initial state of the store
 const initialState = {
@@ -35,6 +41,28 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         filter: action.payload.filter,
+      };
+
+    case EDIT_TASK:
+      //* Map over the tasks array, and update the description of the task with the given ID
+      return {
+        ...state,
+        tasks: state.tasks.map((task) => {
+          if (task.id === action.payload.id) {
+            return {
+              ...task,
+              description: action.payload.description,
+            };
+          } else {
+            return task;
+          }
+        }),
+      };
+    case DELETE_TASK:
+      //* Filter out the task with the given ID from the tasks array
+      return {
+        ...state,
+        tasks: state.tasks.filter((task) => task.id !== action.payload.id),
       };
     default:
       //* If the action type doesn't match any of the cases above, return the current state

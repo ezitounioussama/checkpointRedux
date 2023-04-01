@@ -20,7 +20,7 @@ const ListTask = () => {
 
   // Render the list of tasks
   return (
-    <div className="border rounded-none xl:rounded-lg md:rounded-lg w-full flex flex-wrap px-10 py-5 ">
+    <div className="border rounded-none xl:rounded-lg md:rounded-lg  w-full flex flex-wrap px-10 py-5 ">
       {tasks.map((task) => (
         <Task key={task.id} task={task} />
       ))}
